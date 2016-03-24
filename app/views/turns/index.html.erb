@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Turns</h1>
+<div class="row">
+  <div class="col-md-10">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @turns.each do |turn| %>
+          <tr>
+            <td><%= turn.date %></td>
+             <td><%= link_to 'Destroy', turn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+

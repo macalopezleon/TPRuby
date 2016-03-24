@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cancha.name %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @cancha.size %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @cancha.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_cancha_path(@cancha) %> |
+<%= link_to 'Back', canchas_path %>

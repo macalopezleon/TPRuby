@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Canchas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @canchas.each do |cancha| %>
+      <tr>
+        <td><%= cancha.name %></td>
+        <td><%= cancha.size %></td>
+        <td><%= cancha.price %></td>
+        <td><%= link_to 'Show', cancha %></td>
+        <td><%= link_to 'Edit', edit_cancha_path(cancha) %></td>
+        <td><%= link_to 'Destroy', cancha, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cancha', new_cancha_path %>

@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+
+<h1>New Turn</h1>
+<div class="row">
+  <div class="col-md-4">
+    <form method="get">
+      <div class="form-group">
+        <%= select_tag 'cancha', options_from_collection_for_select(Cancha.all, 'id', :full_name), {class: "form-control"}  %>
+      </div>
+      <input class="btn btn-default" type="submit"/>
+    </form>
+    </div>
+</div>
+
+<div class="row">
+
+  <div id="calendar"></div>
+</div>
+
+
+<script>
+    $('#calendar').fullCalendar({
+        lang: 'es',
+        businessHours: {
+            start: '08:00',
+            end: '24:00'
+        },
+        minTime: "08:00:00",
+        maxTime: "24:00:00",
+        slotDuration:'01:00:00',
+        slotEventOverlap: false,
+        defaultView: 'agendaWeek',
+        allDaySlot: false,
+        height: 386,
+        defaultTimedEventDuration: '01:00:00',
+        header: {
+            left:   'title',
+            center: '',
+            right:  'today prev,next'
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function(start, allDay) {
+            var title = confirm('Desea reservar el turno?');
+            if (title == true) {
+                $('#calendar').fullCalendar('renderEvent',
+                        {
+                            start: start
+                        },
+                        true
+                );
+                window.location = '/turns/<%= current_user.id %>/create?start='+ start + '&cancha=' + <%= params[:cancha] %>;
+            };
+
+            $('#calendar').fullCalendar('unselect');
+        },
+        editable: false,
+        events: [
+            <% @turns.each do |turn| %>
+            {
+                title  : '<%= turn.cancha.name %>',
+                start  : '<%= turn.date.to_formatted_s(:iso8601) %>'
+            },
+        <% end %>
+        ]
+
+    })
+</script>

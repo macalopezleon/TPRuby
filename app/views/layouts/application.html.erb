@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <nav class="navbar navbar-default" style="margin-bottom: 0px; float: right">
+      <div class="container-fluid">
+        <p class="nav navbar-text navbar-right">
+          <% if user_signed_in? %>
+              Logged in as <strong><%= current_user.email %></strong>.
+
+              <%= link_to "Logout", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %>
+          <% else %>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+          <% end %>
+
+        </p>
+      </div>
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="#">
+              <h1>Reservas</h1>
+            </a>
+          </li>
+          <h4>
+              <li>
+
+                <%= link_to "Reservar tu turno", new_turn_path %>
+
+              </li>
+              <li>
+                <%= link_to "Ver tus turno", turns_path %>
+              </li>
+            <li>
+              <%= link_to "Comprar creditos", turns_path %>
+            </li>
+              <li>
+                <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+              </li>
+          </h4>
+        </ul>
+      </div>
+    </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 col-sm-offset-3">
+            <%= yield %>
+          </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

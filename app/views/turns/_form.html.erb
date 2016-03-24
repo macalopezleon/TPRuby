@@ -1,0 +1,19 @@
+<%= form_for(@turn) do |f| %>
+  <% if @turn.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
+
+      <ul>
+      <% @turn.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cancha_id %><br>
+    <%= f.collection_select(:cancha_id, Cancha.all, :id, :name) %><br><br>
+  </div>
+
+<% end %>
