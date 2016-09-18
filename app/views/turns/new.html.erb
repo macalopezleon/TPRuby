@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>New Turn</h1>
+<h1>Nuevo turno</h1>
+<br>
 <div class="row">
   <div class="col-md-4">
     <form method="get">
       <div class="form-group">
         <%= select_tag 'cancha', options_from_collection_for_select(Cancha.all, 'id', :full_name), {class: "form-control"}  %>
       </div>
+      <br>
       <input class="btn btn-default" type="submit"/>
     </form>
     </div>
@@ -17,8 +19,9 @@
   <div id="calendar"></div>
 </div>
 
-
+<script src='fullcalendar/lang-all.js'></script>
 <script>
+
     $('#calendar').fullCalendar({
         lang: 'es',
         businessHours: {
@@ -38,10 +41,12 @@
             center: '',
             right:  'today prev,next'
         },
+        titleFormat:'MMMM YYYY',
         selectable: true,
+        selectOverlap:false,
         selectHelper: true,
         select: function(start, allDay) {
-            var title = confirm('Desea reservar el turno?');
+            var title = confirm('Desea reservar el turno? ');
             if (title == true) {
                 $('#calendar').fullCalendar('renderEvent',
                         {

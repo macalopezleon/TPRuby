@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Turns</h1>
+<h1>Mis turnos</h1>
 <div class="row">
   <div class="col-md-10">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Date</th>
+          <th>Dia</th>
+          <th>Hora</th>
+          <th>Cancha</th>
+          <th>Tipo Cancha</th>
           <th colspan="1"></th>
         </tr>
       </thead>
@@ -14,8 +17,11 @@
       <tbody>
         <% @turns.each do |turn| %>
           <tr>
-            <td><%= turn.date %></td>
-             <td><%= link_to 'Destroy', turn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= turn.date.strftime('%v') %></td>
+            <td><%= turn.date.strftime('%R') %></td>
+            <td><%= turn.cancha.name %></td>
+            <td><%= turn.cancha.size %></td>
+             <td><%= button_to 'Cancelar turno', turn, method: :delete, data:{ confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
           </tr>
         <% end %>
       </tbody>
@@ -23,4 +29,3 @@
     </table>
   </div>
 </div>
-
