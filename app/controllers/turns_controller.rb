@@ -29,6 +29,7 @@ class TurnsController < ApplicationController
   # POST /turns
   # POST /turns.json
   def create
+    puts current_user.credit
     if current_user.credit > 0
       current_user.credit=current_user.credit-1
       current_user.save
