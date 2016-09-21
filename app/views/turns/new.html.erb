@@ -45,8 +45,11 @@
         selectable: true,
         selectOverlap:false,
         selectHelper: true,
-        select: function(start, allDay) {
-            var title = confirm('Desea reservar el turno? ');
+        eventOverlap: false,
+        select: function(start,allDay) {
+          var d = new Date(start);
+          var s= d.getHours() + 3;
+            var title = confirm('Desea reservar el turno de las ' +s+ 'hs?');
             if (title == true) {
                 $('#calendar').fullCalendar('renderEvent',
                         {
