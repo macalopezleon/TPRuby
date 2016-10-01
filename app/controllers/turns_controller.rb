@@ -14,12 +14,13 @@ class TurnsController < ApplicationController
 
   # GET /turns/new
   def new
-    if !(params[:cancha].nil?)
-      @turns = Turn.where(cancha_id: (params[:cancha])).all
-    else
-      @turns = []
-    end
-    @turn = Turn.new
+      if !(params[:cancha].nil?)
+        @turns = Turn.where(cancha_id: (params[:cancha])).all
+      else
+        @turns = []
+      end
+      @turn = Turn.new
+
   end
 
   # GET /turns/1/edit
@@ -30,7 +31,7 @@ class TurnsController < ApplicationController
   # POST /turns.json
   def create
     puts current_user.credit
-    if current_user.credit > 0
+    if (!(current_user.credit.nil?) && (current_user.credit > 0))
       current_user.credit=current_user.credit-1
       current_user.save
       date = Time.at(params[:start].to_i / 1000)

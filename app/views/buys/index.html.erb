@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Compras</h1>
+<div class="row">
+  <div class="col-md-10">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Creditos comprados</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%if !(@buys.empty?)%>
+        <% @buys.each do |buy| %>
+          <tr>
+            <td><%= buy.created_at %></td>
+            <td><%= buy.credit %></td>
+          </tr>
+        <% end %>
+        <% else %>
+          <td>No ha realizado compras</td>
+          <td/>
+      <% end%>
+      </tbody>
+
+      <p><%= button_to('Comprar', {method: :create}, class: "btn btn-success") %></p>
+    </table>
+  </div>
+</div>

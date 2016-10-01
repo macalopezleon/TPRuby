@@ -15,15 +15,23 @@
       </thead>
 
       <tbody>
-        <% @turns.each do |turn| %>
-          <tr>
-            <td><%= turn.date.strftime('%v') %></td>
-            <td><%= turn.date.strftime('%R') %></td>
-            <td><%= turn.cancha.name %></td>
-            <td><%= turn.cancha.size %></td>
-             <td><%= button_to 'Cancelar turno', turn, method: :delete, data:{ confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
-          </tr>
-        <% end %>
+        <%if !(@turns.empty?)%>
+          <% @turns.each do |turn| %>
+            <tr>
+              <td><%= turn.date.strftime('%v') %></td>
+              <td><%= turn.date.strftime('%R') %></td>
+              <td><%= turn.cancha.name %></td>
+              <td><%= turn.cancha.size %></td>
+              <td><%= button_to 'Cancelar turno', turn, method: :delete, data:{ confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+          <% else %>
+            <td>No ha reservado ningun turno</td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+        <% end%>
       </tbody>
 
     </table>
