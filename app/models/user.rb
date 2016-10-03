@@ -6,5 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :turns
 
-
+  def require_admin
+  redirect_to '/' if current_user && current_user.admin?
+  end
+  
 end

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001213736) do
+ActiveRecord::Schema.define(version: 20161002223304) do
 
   create_table "buys", force: :cascade do |t|
-    t.integer  "credit"
+    t.integer  "credit",     default: 0, null: false
     t.integer  "idMP"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "buys", ["user_id"], name: "index_buys_on_user_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20161001213736) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "credit"
+    t.integer  "credit",                 default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

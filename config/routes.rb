@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
 
-  get 'welcome/index'
+
   root 'welcome#index'
 
   resources :turns
   resources :canchas
   resources :buys
+  resources :welcome
+  
+  get 'welcome/index'
   get 'buys/index'
   get 'turns/:id/create' => 'turns#create'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

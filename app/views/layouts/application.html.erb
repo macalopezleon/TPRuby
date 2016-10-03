@@ -9,9 +9,9 @@
 <body>
     <nav class="navbar navbar-default" style="margin-bottom: 0px; float: right">
       <div class="container-fluid" style="margin-bottom: 0px;>
-        <p class="nav navbar-text navbar-right" ;>
+        <p class="nav navbar-text navbar-right">
           <% if user_signed_in? %>
-              Usuario <strong><%= current_user.email %></strong>.
+              Usuario <strong><%= current_user.email %></strong>
               <br>
               <%= button_to "Cerrar sesion", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %>
           <% else %>
@@ -29,24 +29,22 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
-            <a href="#">
+            <a href="/">
               <h1>Reservas</h1>
             </a>
           </li>
           <h4>
               <li>
-
-                <%= link_to "Reservar tu turno", new_turn_path %>
-
+                <%= link_to_if(user_signed_in?,"Reservar tu turno", new_turn_path)%>
               </li>
               <li>
-                <%= link_to "Ver tus turno", turns_path %>
+                  <%= link_to_if(user_signed_in?,"Ver tus turno", turns_path)%>
               </li>
             <li>
-              <%= link_to "Comprar creditos", buys_path %>
+              <%= link_to_if(user_signed_in?,"Comprar creditos", buys_path)%>
             </li>
               <li>
-                <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+                  <%= link_to_if(user_signed_in?,"Editar perfil", edit_user_registration_path)%>
               </li>
           </h4>
         </ul>
