@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   resources :canchas
   resources :buys
   resources :welcome
-  
+
   get 'welcome/index'
   get 'buys/index'
   get 'turns/:id/create' => 'turns#create'
+
+  #get "*any", via: :all, to: "errors#not_found"
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
     # The priority is based upon order of creation: first created -> highest priority.

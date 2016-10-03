@@ -1,10 +1,12 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-  config.authorize_with do
-   if !(current_user.nil?)
-     redirect_to welcome_path unless  warden.user.admin == true
-   end
+config.authorize_with do |controller|
+  unless (!(current_user.nil?) && (warden.user.admin == true))
+        flash[:notice] = "No eres administrador"
+        redirect_to '/'
+      end
+    end
   end
 
   ## == Devise ==
@@ -20,20 +22,3 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
-  config.actions do
-    dashboard                     # mandatory
-    index                         # mandatory
-    new
-    export
-    bulk_delete
-    show
-    edit
-    delete
-    show_in_app
-
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
-  end
-end
