@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   get 'buys/index'
   get 'turns/:id/create' => 'turns#create'
 
-  #get "*any", via: :all, to: "errors#not_found"
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
+
+  get "*any", via: :all, to: "errors#not_found"
     # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
