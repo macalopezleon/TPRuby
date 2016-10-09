@@ -8,41 +8,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body id="none">
-<h1>Nuevo turno</h1>
-<br>
-<div class="row">
-  <div class="col-md-4">
-    <form method="get">
-      <div class="form-group">
-        <%= select_tag 'cancha', options_from_collection_for_select(Cancha.all, 'id', :full_name), {class: "form-control"}  %>
-      </div>
-      <br>
-      <input class="btn btn-default" type="submit"/>
-    </form>
+  <h1>Nuevo turno</h1>
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+      <form method="get">
+        <div class="form-group">
+          <%= select_tag 'cancha', options_from_collection_for_select(Cancha.all, 'id', :full_name), {class: "form-control"}  %>
+        </div>
+        <br>
+        <input class="btn btn-default" type="submit"/>
+      </form>
+    </div>
   </div>
-</div>
-<br>
-<br>
+  <br>
+  <br>
 
-<div id="calendar">
+  <div id="calendar">
 
-  <script>
+    <script>
 
-  var myStart;
 
-  function ok(){
-    $('#calendar').fullCalendar('renderEvent',
-    {
-      start: myStart
-    },
-    true
-  );
-  window.location = '/turns/<%= current_user.id %>/create?start='+ start + '&cancha=' + <%= params[:cancha] %>;
-};
+    var myStart;
+
+    function ok(){
+      $('#calendar').fullCalendar('renderEvent',
+      {
+        start: myStart
+      },
+      true
+    );
+    window.location = '/turns/<%= current_user.id %>/create?start='+ myStart + '&cancha=' + <%= params[:cancha] %>;
+  };
 
   $('#myModal').modal({
     show: 'false'
-});
+  });
   $('#calendar').fullCalendar({
     lang: 'es',
     businessHours: {
@@ -55,7 +56,7 @@
     slotEventOverlap: false,
     defaultView: 'agendaWeek',
     allDaySlot: false,
-    height: 386,
+    height: 389,
     monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
     dayNamesShort : ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
     defaultTimedEventDuration: '01:00:00',
@@ -73,52 +74,51 @@
 
     select: function(start,allDay) {
       var d = new Date(start);
-
       var moment = new Date();
       moment.setHours(moment.getHours() - 3)
       var s= d.getHours() + 3;
-      console.log(moment);
-      console.log(d);
       if (d > moment){
         myStart = start;
         $('#myModal').modal('show');
-    }
-    $('#calendar').fullCalendar('unselect');
-  },
-  editable: false,
-  events: [
-    <% @turns.each do |turn| %>
-    {
-      title  : '<%= turn.cancha.name %>',
-      start  : '<%= turn.date.to_formatted_s(:iso8601) %>'
+        $(hora).text("Desea reservar el turno de las "+s+"hs?");
+      }
+      $('#calendar').fullCalendar('unselect');
     },
-    <% end %>
-  ]
+    editable: false,
+    events: [
+      <% @turns.each do |turn| %>
+      {
+        title  : '<%= turn.cancha.name %>',
+        start  : '<%= turn.date.to_formatted_s(:iso8601) %>'
+      },
+      <% end %>
+    ]
 
-})
-</script>
+  })
+
+
+  </script>
 
 </div>
 <div id="myModal" class="modal fade"  role="dialog">
-    <div class="modal-dialog">
+  <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-
-          <p><a href="http://lmgtfy.com/?q=Como+usar+un+modal+en+bootstrap">Clickeame maca!</a></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ok();">Aceptar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Reservar turno</h4>
       </div>
-
+      <div class="modal-body">
+        <p id="hora"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ok();">Aceptar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
     </div>
+
   </div>
+</div>
 
 </body>

@@ -49,4 +49,3 @@ group :development, :test do
   gem 'twitter-bootstrap-rails'
   gem 'less-rails'
 end
-
