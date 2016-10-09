@@ -1,13 +1,17 @@
 RailsAdmin.config do |config|
-
   ### Popular gems integration
-config.authorize_with do |controller|
-  unless (!(current_user.nil?) && (warden.user.admin == true))
+  config.authorize_with do |controller|
+    if !(current_user.nil?)
+      unless (warden.user.admin == true)
         flash[:notice] = "No eres administrador"
         redirect_to '/'
       end
+    else
+      flash[:notice] = "Por favor inicie sesion"
+      redirect_to '/'
     end
   end
+end
 
   ## == Devise ==
   # config.authenticate_with do

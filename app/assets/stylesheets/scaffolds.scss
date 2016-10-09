@@ -71,3 +71,10 @@ div {
     list-style: square;
   }
 }
+
+#calendar .fc-event, .fc-agenda .fc-event-time, .fc-event a {
+    background-color: #333; /* background color del evento */
+}
+#calenar .fc-other-month .fc-day-number {
+     display:none;
+}
