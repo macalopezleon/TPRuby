@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'buys/index'
   get 'turns/:id/create' => 'turns#create'
+  get "turns/cancel_turn" => 'turns#cancel_turn', :as => :cancel_turn
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users

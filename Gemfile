@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'mercadopago', '~> 2.2', '>= 2.2.1'
 gem 'mercadopago-api'
 gem 'mercadopago-sdk'
-
+gem 'bootstrap-sass', '2.3.2.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
