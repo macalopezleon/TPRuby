@@ -3,25 +3,6 @@
 <h1>Mis turnos</h1>
 <body>
 
-  <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Cancelar turno</h4>
-        </div>
-        <div class="modal-body">
-          <p>Desea Cancelar el turno?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ok();">Aceptar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
 <div class="row">
   <div class="col-md-10">
     <table class="table table-striped">
@@ -43,8 +24,7 @@
               <td><%= turn.date.strftime('%R') %></td>
               <td><%= turn.cancha.name %></td>
               <td><%= turn.cancha.size %></td>
-              <td><%= link_to 'Cancelar turno', turn, {:remote => true,'data-toggle' =>  "modal", 'data-target' => '#modal-window'}  %></td>
-              <td><%= button_to 'Cancelar turno', turn, method: :delete, data:{ toggle: "modal", target: "#modal-window" }, class: "btn btn-danger", "data-toggle" => "modal" %></td>
+              <td><%= button_to 'Cancelar turno', turn, method: :delete, data: {confirm: "Desea cancelar el turno?"}, class: "btn btn-danger" %></td>
             </tr>
           <% end %>
           <% else %>

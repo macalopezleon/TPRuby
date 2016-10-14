@@ -57,15 +57,6 @@ class TurnsController < ApplicationController
     # PATCH/PUT /turns/1
     # PATCH/PUT /turns/1.json
     def update
-      respond_to do |format|
-        if @turn.update(turn_params)
-          format.html { redirect_to @turn, notice: 'Turn was successfully updated.' }
-          format.json { render :show, status: :ok, location: @turn }
-        else
-          format.html { render :edit }
-          format.json { render json: @turn.errors, status: :unprocessable_entity }
-        end
-      end
     end
 
     # DELETE /turns/1
@@ -75,6 +66,8 @@ class TurnsController < ApplicationController
       today=DateTime.now
       if  (day > today)
         @turn.destroy
+        current_user.credit=current_user.credit+1
+        current_user.save
         respond_to do |format|
           format.html { redirect_to turns_url, notice: 'El turno se Canceló correctamente' }
           format.json { head :no_content }
@@ -82,13 +75,6 @@ class TurnsController < ApplicationController
       else
         flash[:notice] = "No se puede cancelar turnos con menos de 3hs de anticipacion"
         redirect_to action: "index"
-      end
-    end
-
-    def cancel_turn
-      respond_to do |format|
-        format.html
-        format.js
       end
     end
 
