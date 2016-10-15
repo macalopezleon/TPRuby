@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   resources :welcome
 
   get 'welcome/index'
+  get 'buys/create'
   get 'buys/index'
+  post 'buys/new' => 'buys#create'
   get 'turns/:id/create' => 'turns#create'
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users

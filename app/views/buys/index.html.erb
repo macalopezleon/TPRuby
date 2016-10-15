@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Compras</h1>
+
 <div class="row">
   <div class="col-md-10">
     <table class="table table-striped">
@@ -24,8 +25,8 @@
           <td/>
       <% end%>
       </tbody>
+      <p><%= link_to_if(user_signed_in?,"Nueva Comprar", new_buy_path, class: "btn btn-success") %></p>
 
-      <p><%= button_to('Comprar', {method: :create}, class: "btn btn-success") %></p>
     </table>
   </div>
 </div>
