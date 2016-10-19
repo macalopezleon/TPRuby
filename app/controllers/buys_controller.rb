@@ -22,54 +22,39 @@ class BuysController < ApplicationController
 
     }
     $preference = $mp.create_preference($preferenceData)
-    puts $preference
-#    AT=`curl -s -X POST -H 'content-type: application/x-www-form-urlencoded' 'https://api.mercadopago.com/oauth/token' -d 'grant_type=client_credentials' -d 'client_id=8060680399806762' -d 'client_secret=vY9wVUceuL3VHNqu3cEgpdCtTWBosIlC' | grep -o '"access_token":"[^"]*"' | sed -n 's/.*"access_token":"\(.*\)"/\1/p'`
-#
-  #  curl -X POST \
-  #  -H "Content-Type: application/json" \
-#    "https://api.mercadopago.com/users/test_user?access_token=$AT" \
-  #  -d '{"site_id":"MLA"}'
-
-    paymentData = Hash[
-      "transaction_amount" => 100,
-      "description" => "Title of what you are paying for",
-      "payment_method_id" => "rapipago",
-      "payer" => Hash[
-        "email" => "test_user_37653740@testuser.com"
-      ]
-    ]
-    payment = $mp.post("/v1/payments", paymentData)
-
-    if payment["status"] == "200"
-      puts payment
-      puts "entro"
-    else
-      puts "nada"
-    end
+    url= $preference['response']['sandbox_init_point']
+    id_url= url.split('=')[1]
+    #    if $payment_info["status"] == "200"
+    #      puts payment
+    #      puts "ingreso"
+    #    else
+    #      puts "no ingreso"
+    #    end
 
     buys_params={ :credit=>params[:cant],
-      :idMP => $preference["response"]["id"],
+      :idMP => id_url,
       :user_id => current_user.id}
-      @buy = Buy.new(buys_params)
-      respond_to do |format|
-        if @buy.save
-          format.html { redirect_to buys_path, notice: 'Se ha realizado la compra existosamente' }
-          format.json { render :show, status: :created, location: @buy }
-        else
-          format.html { render :new }
-          format.json { render json: @buy.errors, status: :unprocessable_entity }
-        end
+    @buy = Buy.new(buys_params)
+    credits=current_user.credit+params[:cant].to_i
+
+    respond_to do |format|
+      if @buy.save
+        @current_user.update_attributes(credit: credits)
+        format.html { redirect_to buys_path, notice: 'Se ha realizado la compra existosamente' }
+        format.json { render :show, status: :created, location: @buy }
+      else
+        format.html { render :new }
+        format.json { render json: @buy.errors, status: :unprocessable_entity }
       end
     end
-
-    puts $preferenceResult
-
-    def index
-      @buys = Buy.where(user_id: (current_user)).all
-    end
-
-    def show
-    end
-
-
   end
+
+  def index
+    @buys = Buy.where(user_id: (current_user)).all
+  end
+
+  def show
+  end
+
+
+end

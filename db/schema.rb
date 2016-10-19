@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002223304) do
+ActiveRecord::Schema.define(version: 20161019151437) do
 
   create_table "buys", force: :cascade do |t|
     t.integer  "credit",     default: 0, null: false
-    t.integer  "idMP"
+    t.string   "idMP"
     t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
