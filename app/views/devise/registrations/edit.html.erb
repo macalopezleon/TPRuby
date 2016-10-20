@@ -1,0 +1,44 @@
+<div class="col-md-offset-4 col-md-4" style="text-align:center">
+  <div class="page-header">
+    <div class="jumbotron">
+
+      <h2>Editar Usuario</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <div class="field">
+        <%= f.label :current_password %> <br />
+        <%= f.password_field :current_password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+
+
+      <div class="actions">
+        <%= f.submit "Aceptar", class: "btn btn-primary"%>
+        <%= button_to "Cancelar", :back, class: "btn btn-danger" %>
+
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

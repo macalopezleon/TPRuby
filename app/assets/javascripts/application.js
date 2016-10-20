@@ -16,4 +16,5 @@
 //= require fullcalendar
 //= require turbolinks
 //= require bootstrap-modal
+//= require twitter/bootstrap
 //= require_tree .
