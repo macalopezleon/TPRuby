@@ -3,4 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #none {
   background-image: none;
+
+  .navbar {
+      position: relative;
+      min-height: 0px;
+      margin-bottom: 1px;
+      border: 1px solid transparent;
+  }
 }

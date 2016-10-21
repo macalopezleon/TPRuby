@@ -6,10 +6,15 @@
 </head>
 
 <body>
-  <div>
-    <form method="post" action="/buys/new" class="button_to" >
-      <input name="cant" type="text"/>
-      <input value="Comprar" type="submit" />
-    </form>
+<div style= "margin-top:50px">
+<h4>Creditos</h4>
+    <div class="col-xs-2" >
+      <form method="post" action="/buys/new" class="button_to" >
+        <input name="cant" type="number" min="1" max="30" class="form-control"/>
+      </div>
+      <div>
+        <input value="Comprar" type="submit" class="btn btn-success"/>
+      </form>
+    </div>
   </div>
 </body>

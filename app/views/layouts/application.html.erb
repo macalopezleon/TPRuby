@@ -7,56 +7,64 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="navbar navbar-default" style="margin-bottom: 0px; float: right">
-      <div class="container-fluid" style="margin-bottom: 0px;>
-        <p class="nav navbar-text navbar-right">
+  <nav class="navbar navbar-inverse" style="padding-bottom: 0px">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">CanchasWeb</a>
+      </div>
+      <!--     <ul class="nav navbar-nav">
           <% if user_signed_in? %>
-              Usuario <strong><%= current_user.email %></strong>
-              <br>
-              <%= button_to "Cerrar sesion", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %>
-          <% else %>
-              <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Ingresar", new_user_session_path, :class => 'navbar-link'  %>
-          <% end %>
+        <li class="active">  Usuario <strong><%= current_user.email %></strong></li>
+     <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <% end %>
 
-        </p>
-      </div>
-    </nav>
+    </ul>
+-->
+  <strong><ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+      <li class="navbar-link">  Usuario <strong><%= current_user.email %></strong></li>
+      <li><%= link_to "Cerrar sesion", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %></li>
+      <% else %>
+      <li><%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %></li>
+      <li><%= link_to "Ingresar", new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+</nav></strong>
 
-    <div id="wrapper">
 
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <a href="/">
-              <h1>Reservas</h1>
-            </a>
-          </li>
-          <h4>
-              <li>
-                <%= link_to_if(user_signed_in?,"Reservar tu turno", new_turn_path)%>
-              </li>
-              <li>
-                  <%= link_to_if(user_signed_in?,"Ver tus turno", turns_path)%>
-              </li>
-            <li>
-              <%= link_to_if(user_signed_in?,"Comprar creditos", buys_path)%>
-            </li>
-              <li>
-                  <%= link_to_if(user_signed_in?,"Editar perfil", edit_user_registration_path)%>
-              </li>
-          </h4>
-        </ul>
-      </div>
+
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <h4>
+        <li>
+          <%= link_to_if(user_signed_in?,"Reservar tu turno", new_turn_path)%>
+        </li>
+        <li>
+          <%= link_to_if(user_signed_in?,"Ver tus turno", turns_path)%>
+        </li>
+        <li>
+          <%= link_to_if(user_signed_in?,"Comprar creditos", buys_path)%>
+        </li>
+        <li>
+          <%= link_to_if(user_signed_in?,"Editar perfil", edit_user_registration_path)%>
+        </li>
+      </h4>
+    </ul>
+  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 col-sm-offset-3">
+      <%= yield %>
     </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-8 col-sm-offset-3">
-            <%= yield %>
-          </div>
-        </div>
-    </div>
+  </div>
+</div>
+
+
 
 
 </body>
