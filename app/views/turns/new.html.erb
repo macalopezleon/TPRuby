@@ -37,6 +37,7 @@
       },
       true
     );
+    window.location = '/turns/<%= current_user.id %>/create?start='+ myStart + '&cancha=' + <%= params[:cancha] %>;
   };
 
   $('#myModal').modal({
@@ -79,8 +80,6 @@
         myStart = start;
         $('#myModal').modal('show');
         $(hora).text("Desea reservar el turno de las "+s+"hs?");
-        window.location = '/turns/<%= current_user.id %>/create?start='+ myStart + '&cancha=' + <%= params[:cancha] %>;
-        
       }
       $('#calendar').fullCalendar('unselect');
     },
