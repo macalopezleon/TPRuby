@@ -53,4 +53,5 @@ group :development, :test do
   gem 'momentjs-rails'
   gem 'twitter-bootstrap-rails'
   gem 'less-rails'
+  gem 'seed_dump'
 end

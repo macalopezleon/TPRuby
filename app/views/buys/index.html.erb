@@ -15,18 +15,19 @@
       <tbody>
         <%if !(@buys.empty?)%>
         <% @buys.each do |buy| %>
-          <tr>
-            <td><%= buy.created_at %></td>
-            <td><%= buy.credit %></td>
-          </tr>
+        <tr>
+          <td><%= buy.created_at %></td>
+          <td><%= buy.credit %></td>
+        </tr>
         <% end %>
         <% else %>
-          <td>No ha realizado compras</td>
-          <td/>
-      <% end%>
+        <td>No ha realizado compras</td>
+        <td/>
+        <% end%>
       </tbody>
-      <p><%= link_to_if(user_signed_in?,"Nueva Comprar", new_buy_path, class: "btn btn-success") %></p>
-
+      <div style="text-align: right">
+        <p><%= link_to_if(user_signed_in?,"Nueva Comprar", new_buy_path, class: "btn btn-success") %></p>
+      </div>
     </table>
   </div>
 </div>
