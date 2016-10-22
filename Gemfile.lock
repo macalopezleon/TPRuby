@@ -233,6 +233,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.10)
   bootstrap-sass (= 2.3.2.1)
   byebug
   cancan

@@ -5,6 +5,7 @@ class BuysController < ApplicationController
   client_secret='vY9wVUceuL3VHNqu3cEgpdCtTWBosIlC'
 
   def create
+    if !(params[:cant].empty?)
     $mp = MercadoPago.new('8060680399806762','vY9wVUceuL3VHNqu3cEgpdCtTWBosIlC')
     $mp.sandbox_mode(true)
 
@@ -47,6 +48,10 @@ class BuysController < ApplicationController
         format.json { render json: @buy.errors, status: :unprocessable_entity }
       end
     end
+  else
+    flash[:notice] = "Debe ingresar la cantidad de creditos que desea comprar"
+    redirect_to action: "new"
+  end
   end
 
   def index
