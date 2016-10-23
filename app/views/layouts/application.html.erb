@@ -13,21 +13,21 @@
         <a class="navbar-brand" href="/">CanchasWeb</a>
       </div>
       <!--     <ul class="nav navbar-nav">
-          <% if user_signed_in? %>
-        <li class="active">  Usuario <strong><%= current_user.email %></strong></li>
-     <li><a href="#">Page 1</a></li>
+      <% if user_signed_in? %>
+      <li class="active">  Usuario <strong><%= current_user.email %></strong></li>
+      <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
       <% end %>
 
     </ul>
--->
+  -->
   <strong><ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-      <li class="navbar-link">  Usuario <strong><%= current_user.email %></strong></li>
-      <li><%= link_to "Cerrar sesion", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %></li>
-      <% else %>
-      <li><%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %></li>
-      <li><%= link_to "Ingresar", new_user_session_path, :class => 'navbar-link'  %>
+    <% if user_signed_in? %>
+    <li class="navbar-link">  Usuario <strong><%= current_user.email %></strong></li>
+    <li><%= link_to "Cerrar sesion", destroy_user_session_path, :method=> :delete, :class => 'navbar-link'  %></li>
+    <% else %>
+    <li><%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %></li>
+    <li><%= link_to "Ingresar", new_user_session_path, :class => 'navbar-link'  %>
       <% end %>
     </li>
   </ul>
@@ -37,25 +37,29 @@
 
 
 
-  <!-- Sidebar -->
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <h4>
-        <li>
-          <%= link_to_if(user_signed_in?,"Reservar tu turno", new_turn_path)%>
-        </li>
-        <li>
-          <%= link_to_if(user_signed_in?,"Ver tus turno", turns_path)%>
-        </li>
-        <li>
-          <%= link_to_if(user_signed_in?,"Comprar creditos", buys_path)%>
-        </li>
-        <li>
-          <%= link_to_if(user_signed_in?,"Editar perfil", edit_user_registration_path)%>
-        </li>
-      </h4>
-    </ul>
-  </div>
+
+<!-- Sidebar -->
+<% if user_signed_in? %>
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <h4>
+      <li>
+        <%= link_to_if(user_signed_in?,"Reservar tu turno", new_turn_path)%>
+      </li>
+      <li>
+        <%= link_to_if(user_signed_in?,"Ver tus turno", turns_path)%>
+      </li>
+      <li>
+        <%= link_to_if(user_signed_in?,"Comprar creditos", buys_path)%>
+      </li>
+      <li>
+        <%= link_to_if(user_signed_in?,"Editar perfil", edit_user_registration_path)%>
+      </li>
+    </h4>
+  </ul>
+
+</div>
+<% end %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-8 col-sm-offset-3">
