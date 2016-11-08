@@ -27,7 +27,9 @@
                         <span class="glyphicon glyphicon-home"></span>
                          Volver a Home
                        </a>
+                       <% if current_user.nil?%>
                       <a href="users/sign_in" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-user"></span> Ingresar Sesion </a>
+                      <% end %>
                   </div>
               </div>
           </div>
