@@ -1,28 +1,26 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Para crear los datos de inicio para poder utilizar la aplicación se debe ejecutar el siguiente comando:
 
-Things you may want to cover:
+rake db:seed 
 
-* Ruby version
+Lo que realizará será crear 2 usuarios, uno de tipo Administrador: 
+email: admin@admin.com - password: 123456
+y otro de un usuario final:
+email: user@user.com - password: 123456
+El cual contará con 2 creditos
 
-* System dependencies
+Además creará 2 Canchas de ejemplo
 
-* Configuration
+Los usuarios pueden crearse cuentas ingresando al sistema o pueden crearse por el administrador.
 
-* Database creation
+El usuario puede reservar turnos ingresando a la sección: "Reservar turno", elige la cancha en la cual desea y si tiene creditos puede reservarlo.
+Puede ver el historial de turnos y si cancelarlo si desea siempre y cuando sea con 3hs de anticipación mínimo.
+Para comprar creditos se debe ingresar en la sección: "Comprar creditos"
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Se agregó algunos test para la validación de la reserva de un turno los cuales se ejecutan ingresando el comando:
+rake spec
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+//
+
