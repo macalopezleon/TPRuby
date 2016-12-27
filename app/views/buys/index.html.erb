@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<p id="notice"> <%= notice %></p>
 <h1>Compras</h1>
 
 <div class="row">
@@ -9,6 +8,8 @@
         <tr>
           <th>Fecha</th>
           <th>Creditos comprados</th>
+          <th>URL</th>
+
         </tr>
       </thead>
 
@@ -18,6 +19,8 @@
         <tr>
           <td><%= buy.created_at %></td>
           <td><%= buy.credit %></td>
+          <td><a href="<%= buy.idMP %>"target="_blank">LINK</a></td>
+
         </tr>
         <% end %>
         <% else %>

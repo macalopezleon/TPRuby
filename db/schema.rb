@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019151437) do
+ActiveRecord::Schema.define(version: 20161227000244) do
 
   create_table "buys", force: :cascade do |t|
     t.integer  "credit",     default: 0, null: false

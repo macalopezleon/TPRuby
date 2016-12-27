@@ -1,12 +1,10 @@
 class BuysController < ApplicationController
   require 'mercadopago.rb'
   skip_before_action :verify_authenticity_token
-  client_id='8060680399806762'
-  client_secret='vY9wVUceuL3VHNqu3cEgpdCtTWBosIlC'
 
   def create
     if !(params[:cant].empty?)
-    $mp = MercadoPago.new('8060680399806762','vY9wVUceuL3VHNqu3cEgpdCtTWBosIlC')
+    $mp = MercadoPago.new(Rails.configuration.secrets['CLIENT_ID'],Rails.configuration.secrets['CLIENT_SECRET'])
     $mp.sandbox_mode(true)
 
 
@@ -16,7 +14,7 @@ class BuysController < ApplicationController
       [
         :title=>"Credits",
         :quantity=>cantidad,
-        :unit_price=>10.0,
+        :unit_price=>Rails.configuration.global['CREDIT_PRICE'],
         :category_id=>"art",
         :currency_id=>"ARS" # Available currencies at: https://api.mercadopago.com/currencies
       ]
@@ -24,7 +22,8 @@ class BuysController < ApplicationController
     }
     $preference = $mp.create_preference($preferenceData)
     url= $preference['response']['sandbox_init_point']
-    id_url= url.split('=')[1]
+
+    p url
     #    if $payment_info["status"] == "200"
     #      puts payment
     #      puts "ingreso"
@@ -33,7 +32,7 @@ class BuysController < ApplicationController
     #    end
 
     buys_params={ :credit=>params[:cant],
-      :idMP => id_url,
+      :idMP => url,
       :user_id => current_user.id}
     @buy = Buy.new(buys_params)
     credits=current_user.credit+params[:cant].to_i
@@ -41,7 +40,7 @@ class BuysController < ApplicationController
     respond_to do |format|
       if @buy.save
         @current_user.update_attributes(credit: credits)
-        format.html { redirect_to buys_path, notice: 'Se ha realizado la compra existosamente' }
+        format.html { redirect_to buys_path, notice: url }
         format.json { render :show, status: :created, location: @buy }
       else
         format.html { render :new }

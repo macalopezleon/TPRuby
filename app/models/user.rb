@@ -10,4 +10,17 @@ class User < ActiveRecord::Base
     redirect_to '/' if current_user && current_user.admin?
   end
 
+  def canBuy
+    !(self.credit.nil?) && (self.credit > 0)
+  end
+
+  def remove_credit(credits)
+    self.credit=self.credit-credits
+    self.save
+  end
+
+  def create_credits(credits)
+    self.credit=self.credit+credits
+    self.save
+  end
 end

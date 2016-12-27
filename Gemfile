@@ -49,7 +49,6 @@ group :development, :test do
   gem 'spring'
   gem 'devise'
   gem 'rails_admin'
-  gem 'cancan'
   gem 'fullcalendar-rails'
   gem 'momentjs-rails'
   gem 'twitter-bootstrap-rails'

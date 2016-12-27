@@ -12,8 +12,9 @@ class TurnsController < ApplicationController
   def show
   end
 
-  # GET /turns/new
+  # GET /turns/newparams[:cancha].nil?params[:cancha].nil?params[:cancha].nil?params[:cancha].nil?
   def new
+    p params[:cancha].nil?
     if !(params[:cancha].nil?)
       @turns = Turn.where(cancha_id: (params[:cancha])).all
     else
@@ -29,10 +30,9 @@ class TurnsController < ApplicationController
 
   # POST /turns
   # POST /turns.json
-  def create
-    if (!(current_user.credit.nil?) && (current_user.credit > 0))
-      current_user.credit=current_user.credit-1
-      current_user.save
+  def create #los turnos siempre se crean de a 1hora
+    if current_user.canBuy
+      current_user.remove_credit(1)
       date = Time.at(params[:start].to_i / 1000)
       turns_params={ :date => date,
         :cancha_id => params[:cancha],
@@ -65,8 +65,7 @@ class TurnsController < ApplicationController
       today=DateTime.now
       if  (day > today)
         @turn.destroy
-        current_user.credit=current_user.credit+1
-        current_user.save
+        current_user.create_credit(1)
         respond_to do |format|
           format.html { redirect_to turns_url, notice: 'El turno se Canceló correctamente' }
           format.json { head :no_content }
